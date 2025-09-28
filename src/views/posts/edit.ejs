@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Post</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      margin: 0;
+      padding: 40px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      color: #444;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+      font-size: 14px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #28a745;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #1e7e34;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #28a745;
+      font-weight: bold;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Editar Post</h1>
+      <form action="/posts/<%= post._id %>/edit" method="POST">
+        <label for="title">Título</label>
+        <input type="text" id="title" name="title" value="<%= post.title %>" required minlength="5" maxlength="30">
+
+        <label for="content">Contenido</label>
+        <textarea id="content" name="content" rows="5" required minlength="10"><%= post.content %></textarea>
+
+        <label for="hashtags">Hashtags (separados por coma)</label>
+        <input type="text" id="hashtags" name="hashtags" value="<%= post.hashtags ? post.hashtags.join(', ') : '' %>">
+
+        <label for="imageUrl">Imagen (URL)</label>
+        <input type="text" id="imageUrl" name="imageUrl" value="<%= post.imageUrl %>">
+
+        <button type="submit">Actualizar</button>
+      </form>
+      <a href="/posts" class="back-link">⬅ Volver a la lista</a>
+    </div>
+  </div>
+</body>
+</html>
